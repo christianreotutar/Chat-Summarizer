@@ -42,20 +42,20 @@
 
 # Part 2
 
-  StringBuilder sb := formatted training data
-  
-  // it is possible to merge this with part I but i wanted to make it more readable, up 2 u
-  for (instance in instances):
-  	HashMap<Integer, Integer> histogram := map from wlabel to countOfwLabel
-  	words = instance[1]
-  	for (words in words):
-  		if word in histogram: histogram[word] += 1
-  		else histogram[word] = 1
-  
-  	sb.append(instance[0]) // add label
-  	for (int i = 0; i < countWords (meaning totalWords); i++) {
-  		sb.append(" " + histogram[i]); // if not in histogram, set to 0
-  	}
-  	sb.append("\n")
-  sb.toString();
-  write sb to file
+    StringBuilder sb := formatted training data
+    
+    // it is possible to merge this with part I but i wanted to make it more readable, up 2 u
+    for (instance in instances):
+      HashMap<Integer, Integer> histogram := map from wlabel to countOfwLabel
+      words = instance[1]
+      for (words in words):
+      	if word in histogram: histogram[word] += 1
+      	else histogram[word] = 1
+    
+      sb.append(instance[0]) // add label
+      for (int i = 0; i < countWords (meaning totalWords); i++) {
+      	sb.append(" " + histogram[i]); // if not in histogram, set to 0
+      }
+      sb.append("\n")
+    sb.toString();
+    write sb to file
