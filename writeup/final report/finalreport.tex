@@ -9,7 +9,7 @@
 \usepackage{latexsym}
 \setlength\titlebox{6.5cm}    % Expanding the titlebox
 
-\title{A Survey of Document Classification Problem Using Modified Na{\"i}ve Bayes and E-M Algorithm\Thanks{This
+\title{A Survey of Short-text Classification Using Modified Na{\"i}ve Bayes and Multiclass Support Vector Machines\Thanks{This
     document has been adapted from the instructions for earlier ACL
     and NAACL proceedings, including those for NAACL-HLT-09 by Joakim
     Nivre and Noah Smith, for ACL-05 by Hwee Tou Ng and Kemal Oflazer,
@@ -22,8 +22,8 @@
 
 \author{Michael Peven\\
   Johns Hopkins University\\
-  100 Bleecker Street, 27A\\
-  New York, NY 10012, USA\\
+  225 W. 29th St\\
+  Baltimore, MD 21211, USA\\
   {\tt mpeven1@jhu.edu}
   \And
   Christian Reotutar \\
@@ -37,7 +37,9 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-  Document classification is an important machine learning and natural language processing topic that has applications in spam filters and summarization techniques. In this typically multi-class problem, the Na{\"i}ve Bayes classifier is a popular model with results rivaling that of the Support Vector Machine classifier with shorter training time. In this survey, we seek to find improvements in the Na{\"i}ve Bayes classifier such that accuracy is improved and compare this to another classifier used in the problem space.
+  Electronic messaging services, including Short Message Service (SMS) over phone networs, Instant Messaging (IM) such as Facebook Chat or Whats App, and microblogging platforms such as Twitter have become more popular than ever before. This massive amount of unlabeled data 
+  
+  Short-text classification is an important machine learning and natural language processing topic that has applications in spam filters and summarization techniques. In this typically multi-class problem, the Na{\"i}ve Bayes classifier is a popular model with results rivaling that of the Support Vector Machine classifier with shorter training time. In this survey, we seek to find improvements in the Na{\"i}ve Bayes classifier such that accuracy is improved and compare this to another classifier used in the problem space.
 \end{abstract}
 
 \section{Introduction}
@@ -47,11 +49,11 @@
   Many problems in the 
 
 \subsection{Topic Classification}
-  This survey deals with the problem of document classification in relation to summarization of documents. That is, given a text document, we want to predict the topic of the document based on a bag-of-words approach. We do this in the domain of Twitter messages: given a Tweet body, we wish to predict the associated hashtag for the Tweet.
+  This survey deals with the problem of short-text classification in relation to summarization of documents. That is, given a text document, we want to predict the topic of the document based on a bag-of-words approach. We do this in the domain of Twitter messages: given a Tweet body, we wish to predict the associated hashtag for the Tweet.
 
 
 \section{Data Description}
-Here we talk about Twitter data and how it relates to our problem
+To classify document The data we are using for this project comes from Twitter (https://twitter.com/). The tweets were downloaded from the Twitter streaming API v1.1 using Mark Dredze's Twitter Stream Dowloader (https://github.com/mdredze/twitter_stream_downloader).
 
 \section{Machine Learning Techniques}
 Here give a broad overview of what we're comparing, what techniques we used and why
@@ -102,6 +104,7 @@ Any improvements for the classifiers we did not have time to implement
 
 \section*{Acknowledgments}
 We would like to acknowledge Ilya Shpitser for giving feedback on our project and offering suggestions. Ilya for the skeleton for the code.
+Also, we would like to thank Mark Dredze for providing access to his twitter stream downloader (https://github.com/mdredze/twitter_stream_downloader).
 
 \begin{thebibliography}{}
 
