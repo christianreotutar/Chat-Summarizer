@@ -27,6 +27,7 @@ public class NaiveBayes extends Predictor {
 	private int _smoothing;
 	
 	public NaiveBayes() {
+		
 		this._numInstances = 0;
 
 		this._labelsCount = new HashMap<>();

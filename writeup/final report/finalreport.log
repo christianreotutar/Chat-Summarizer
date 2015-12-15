@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014/W32TeX) (preloaded format=pdflatex 2015.5.26)  15 DEC 2015 07:36
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014/W32TeX) (preloaded format=pdflatex 2015.5.26)  15 DEC 2015 13:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -84,8 +84,13 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 46.
 
-Underfull \hbox (badness 1571) in paragraph at lines 63--64
-\OT1/ptm/m/n/10.95 Here we give back-ground into the clas-si-fier +
+Overfull \hbox (2.4054pt too wide) in paragraph at lines 60--62
+\OT1/ptm/b/n/10.95 http://people.csail.mit.edu/jrennie/papers/icml03-
+ []
+
+
+Overfull \hbox (14.58237pt too wide) in paragraph at lines 60--62
+\OT1/ptm/b/n/10.95 nb.pdf http://www2.hawaii.edu/ chin/702/sigir99.pdf
  []
 
 [1{c:/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
@@ -94,31 +99,33 @@ Underfull \hbox (badness 1571) in paragraph at lines 63--64
 
 
 ]
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 95.
+Underfull \hbox (badness 1571) in paragraph at lines 67--68
+\OT1/ptm/m/n/10.95 Here we give back-ground into the clas-si-fier +
+ []
+
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 100.
 
 (c:/texlive/2014/texmf-dist/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 95.
- [2
-
-] (./finalreport.aux) ) 
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 100.
+ [2] (./finalreport.aux) ) 
 Here is how much of TeX's memory you used:
  407 strings out of 493109
  5173 string characters out of 6138587
- 58967 words of memory out of 5000000
+ 59967 words of memory out of 5000000
  3905 multiletter control sequences out of 15000+600000
  25214 words of font info for 60 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 25i,9n,19p,553b,256s stack positions out of 5000i,500n,10000p,200000b,80000s
-{c:/texlive/2014/texmf-dist/fonts/enc/dvips/base/8r.enc}
-<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texli
-ve/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><c:/texlive/2014/te
-xmf-dist/fonts/type1/urw/courier/ucrr8a.pfb><c:/texlive/2014/texmf-dist/fonts/t
-ype1/urw/times/utmb8a.pfb><c:/texlive/2014/texmf-dist/fonts/type1/urw/times/utm
-r8a.pfb><c:/texlive/2014/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on finalreport.pdf (2 pages, 69478 bytes).
+ 25i,9n,19p,701b,256s stack positions out of 5000i,500n,10000p,200000b,80000s
+{c:/texlive/2014/texmf-dist/fonts/enc/dvips/base/8r.e
+nc}<c:/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/te
+xlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><c:/texlive/2014
+/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb><c:/texlive/2014/texmf-dist/font
+s/type1/urw/times/utmb8a.pfb><c:/texlive/2014/texmf-dist/fonts/type1/urw/times/
+utmr8a.pfb><c:/texlive/2014/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on finalreport.pdf (2 pages, 71833 bytes).
 PDF statistics:
  36 PDF objects out of 1000 (max. 8388607)
  25 compressed objects within 1 object stream

@@ -35,6 +35,8 @@ public class Driver {
 		String algorithm = CommandLineUtilities.getOptionValue("algorithm");
 		String model_file = CommandLineUtilities.getOptionValue("model_file");
 		
+		String modified_nb = CommandLineUtilities.getOptionValue("modified_nb");
+		
 		if (mode.equalsIgnoreCase("train")) {
 			if (data == null || algorithm == null || model_file == null) {
 				System.out.println("Train requires the following arguments: data, algorithm, model_file");
@@ -46,7 +48,7 @@ public class Driver {
 			data_reader.close();
 			
 			// Train the model.
-			Predictor predictor = train(instances, algorithm);
+			Predictor predictor = train(instances, algorithm, modified_nb);
 			saveObject(predictor, model_file);
 			
 		} else if (mode.equalsIgnoreCase("test")) {
@@ -71,12 +73,13 @@ public class Driver {
 
 	
 
-	private static Predictor train(List<Instance> instances, String algorithm) {
+	private static Predictor train(List<Instance> instances, String algorithm,
+			boolean modified_nb) {
 		// Train the model using "algorithm" on "data"
 		Predictor p = null;
 		switch(algorithm.toLowerCase()) {
 			case "naive":
-				p = new NaiveBayes();
+				p = new NaiveBayes(modified_nb);
 				break;
 		}
 		
@@ -162,6 +165,8 @@ public class Driver {
 		registerOption("predictions_file", "String", true, "The predictions file to create.");
 		registerOption("algorithm", "String", true, "The name of the algorithm for training.");
 		registerOption("model_file", "String", true, "The name of the model file to create/load.");
+		
+		registerOption("modified_nb", "String", true, "Whether to use modified NB or not");
 	}
 
 }

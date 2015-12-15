@@ -41,13 +41,13 @@
 \end{abstract}
 
 \section{Introduction}
-Here we give a brief overview and definition the document classification background 
+  The classification of documents, spanning from text documents and articles to images and videos, has been a prominent problem in information and computer science. The problem is to assign a category or classification to a given document that gives some indication to relationships between documents or information about the document itself. 
 
-\subsection{Problems in document classification}
-Here we talk about problems in this problem space and how it's applied.
+\subsection{Problems in Document Classification}
+  Many problems in the 
 
-\subsection{Summarization}
-Here we talk about our specific domain, summarization, and how document classification relates to this.
+\subsection{Topic Classification}
+  This survey deals with the problem of document classification in relation to summarization of documents. That is, given a text document, we want to predict the topic of the document based on a bag-of-words approach. We do this in the domain of Twitter messages: given a Tweet body, we wish to predict the associated hashtag for the Tweet.
 
 
 \section{Data Description}
@@ -57,12 +57,16 @@ Here we talk about Twitter data and how it relates to our problem
 Here give a broad overview of what we're comparing, what techniques we used and why
 
 \subsection{Na{\"i}ve Bayes}
-Here we give background into the classifier
+\textbf{http://people.csail.mit.edu/jrennie/papers/icml03-nb.pdf} \textbf{http://www2.hawaii.edu/~chin/702/sigir99.pdf}
+  The Na{\"i}ve Bayes Classifier is a probabilistic model based on Bayes' theorem for conditional probabilities but with a na{\"i}ve independence assumption. The basic idea is to find the probability of a classification given the data  (features). This is calculated with probabilities based on the entire training set. The independence assumption assumes the features conditionally independent. For example, features like time of day written and timezone are independent of each other and the presence of one value does highly correlate to the presence of another value. This assumption simplifies calculations and often makes Na{\"i}ve Bayes a quickly trained classifier.
+
+As it relates to our project, we use a bag of words as our features and a single word as the classification for the bag of words. We assume presence of a word is independent of other words. 
+
 
 \subsection{Modified Na{\"i}ve Bayes}
 Here we give background into the classifier + word2vec library
 
-\subsection{Other Classifier}
+\subsection{SVM}
 Here we give background into the classifier
 
 \section{Methods}
@@ -70,10 +74,11 @@ Here we give background into the classifier
 Here we talk about the filtering done on the data, the importance of feature vector formation and attribute picking, and the problems we came upon (e.g. language, more than one hash tag).
 
 \subsection{Code for Na{\"i}ve Bayes}
+  In this survey, we use the multinomial Na{\"i}ve Bayes model used by [Yang and Liu, 1999]
 
 \subsection{Code for Modified Na{\"i}ve Bayes}
 
-\subsection{Code for Other Classifier}
+\subsection{Code for SVM}
 
 \section{Results}
 Here we give a broad overview of our results
