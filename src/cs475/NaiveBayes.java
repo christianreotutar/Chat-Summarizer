@@ -17,8 +17,8 @@ public class NaiveBayes extends Predictor {
 	private Set<String> _uniqueLabels;
 	private int _numUniqueLabels;
 	
-	private Map<String, SparseVector<Integer>> _vocabCount;
-	private Set<Integer> _uniqueVocab;
+	protected Map<String, SparseVector<Integer>> _vocabCount;
+	protected Set<Integer> _uniqueVocab;
 	private int _numUniqueVocab;
 	
 	private Map<String, Double> _probLabel;
@@ -61,8 +61,9 @@ public class NaiveBayes extends Predictor {
 			double denom = totalWordsForLabel + this._numUniqueVocab;
 			//for (Entry<Integer, Double> e : this._vocabCount.get(label)) {
 			for (Integer word : this._uniqueVocab) {	
-				double key = this._vocabCount.get(label).get(word);
-				double num = key + this._smoothing;
+				double wordCount = this._vocabCount.get(label).get(word);
+				double closeWordCount = this.getCloseWordCount(label, word);
+				double num = wordCount + this._smoothing;
 				double prob = (double) (num / denom);
 				sv.put(word, prob);
 			}
@@ -93,14 +94,14 @@ public class NaiveBayes extends Predictor {
 			}
 		}
 		
-		System.out.println("actual: " + instance._label.toString() + "guess: " + maxLabel);
+		//System.out.println("actual: " + instance._label.toString() + "guess: " + maxLabel);
 		return new ClassificationLabel(Integer.parseInt(maxLabel));
 	}
 	
 	/**
 	 * Count number of unique labels
 	 */
-	private void preprocess(List<Instance> instances) {
+	public void preprocess(List<Instance> instances) {
 
 		this._numInstances = instances.size();
 		
@@ -112,7 +113,7 @@ public class NaiveBayes extends Predictor {
 	/**
 	 * Count number of unique vocabulary. NOTE: affects _numVocab variable, _labelsCount
 	 */
-	private Map<String, SparseVector<Integer>> countVocab(List<Instance> instances) {
+	public Map<String, SparseVector<Integer>> countVocab(List<Instance> instances) {
 
 		Set<Integer> uniqueVocab = new HashSet<>();
 		Map<String, Integer> labelCount = new HashMap<String, Integer>();
@@ -165,6 +166,10 @@ public class NaiveBayes extends Predictor {
 		this._labelsCount = labelCount;
 		
 		return histogramVocab;
+	}
+	
+	public int getCloseWordCount(String label, int word) {
+		return 0;
 	}
 	
 }

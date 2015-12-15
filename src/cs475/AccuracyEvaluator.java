@@ -1,8 +1,27 @@
 package cs475;
 
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Scanner;
 
 public class AccuracyEvaluator extends Evaluator {
+	
+	private static Map<Integer, String> _wordTable;
+	private static Map<Integer, String> _labelTable;
+	
+	public AccuracyEvaluator() throws FileNotFoundException {
+		super();
+		
+		this._wordTable = new HashMap<>();
+		this._labelTable = new HashMap<>();
+		this.importWordTable();
+		this.importLabelTable();
+	}
 
 	@Override
 	public double evaluate(List<Instance> instances, Predictor predictor) {
@@ -16,6 +35,17 @@ public class AccuracyEvaluator extends Evaluator {
 			if (predicted.equals(actual)) {
 				correct += 1;
 			}
+			
+			System.out.print("pred: [" + this._labelTable.get(Integer.parseInt(predicted.toString())) 
+			+ "] real: [" + this._labelTable.get(Integer.parseInt(actual.toString()))
+			+ "] words: [");
+			
+			for (Entry<Integer, Integer> e : i.getFeatureVector().getNonZeroFeatures()) {
+				int word = e.getKey();
+				int freq = e.getValue();
+				System.out.print(this._wordTable.get(word) + "=" + freq + " ");
+			}
+			System.out.println("]");
 		}
 		
 		int total = instances.size();
@@ -23,5 +53,40 @@ public class AccuracyEvaluator extends Evaluator {
 		
 		return accuracy;
 	}
+	
+	public void importWordTable() throws FileNotFoundException {
+		String filepath = "./src/data/twitter_small_unique_tweet_words.txt";
+		Scanner scan = new Scanner(new BufferedInputStream(new FileInputStream(filepath)));
+		
+		int count = 0;
+		while (scan.hasNextLine()) {
+			String line = scan.nextLine();
+			if (line.trim().length() == 0)
+				   continue;
+			
+			this._wordTable.put(count, line.trim());
+			count ++;
+		}
+		
+		scan.close();
+	}
+	
+	public void importLabelTable() throws FileNotFoundException {
+		String filepath = "./src/data/twitter_small_unique_hashtags.txt";
+		Scanner scan = new Scanner(new BufferedInputStream(new FileInputStream(filepath)));
 
+		int count = 0;
+		while (scan.hasNextLine()) {
+			String line = scan.nextLine();
+			if (line.trim().length() == 0)
+				   continue;
+
+			this._labelTable.put(count, line.trim());
+			count ++;
+		}
+		
+		scan.close();
+		
+	}
+	
 }

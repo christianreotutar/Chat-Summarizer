@@ -40,5 +40,9 @@ public class FeatureVector implements Serializable {
 	public Set<Entry<Integer, Integer>> getNonZeroFeatures() {
 		return this.data.entrySet();
 	}
+	
+	public String toString() {
+		return this.data.toString();
+	}
 
 }

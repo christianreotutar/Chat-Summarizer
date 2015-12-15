@@ -9,6 +9,7 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -21,9 +22,11 @@ import org.apache.commons.cli.OptionBuilder;
 
 public class Driver {
 	static public LinkedList<Option> options = new LinkedList<Option>();
-	static private Evaluator evaluator = new AccuracyEvaluator();
+	static private Evaluator evaluator;
 
 	public static void main(String[] args) throws IOException{
+		evaluator = new AccuracyEvaluator();
+		
 		String[] manditory_args = { "mode"};
 		createCommandLineOptions();
 
@@ -48,7 +51,7 @@ public class Driver {
 			data_reader.close();
 			
 			// Train the model.
-			Predictor predictor = train(instances, algorithm, modified_nb);
+			Predictor predictor = train(instances, algorithm);
 			saveObject(predictor, model_file);
 			
 		} else if (mode.equalsIgnoreCase("test")) {
@@ -73,13 +76,15 @@ public class Driver {
 
 	
 
-	private static Predictor train(List<Instance> instances, String algorithm,
-			boolean modified_nb) {
+	private static Predictor train(List<Instance> instances, String algorithm) throws FileNotFoundException {
 		// Train the model using "algorithm" on "data"
 		Predictor p = null;
 		switch(algorithm.toLowerCase()) {
 			case "naive":
-				p = new NaiveBayes(modified_nb);
+				p = new NaiveBayes();
+				break;
+			case "modified":
+				p = new ModifiedNaiveBayes();
 				break;
 		}
 		
@@ -165,8 +170,6 @@ public class Driver {
 		registerOption("predictions_file", "String", true, "The predictions file to create.");
 		registerOption("algorithm", "String", true, "The name of the algorithm for training.");
 		registerOption("model_file", "String", true, "The name of the model file to create/load.");
-		
-		registerOption("modified_nb", "String", true, "Whether to use modified NB or not");
 	}
 
 }
