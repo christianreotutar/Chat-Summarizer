@@ -1,0 +1,17 @@
+Resubmit to fix the following:
+
+Methods section should describe your method.  Describe exactly what problem you are solving, and the dataset itself (streaming is ok): inputs, outputs, how you will validate/determine success.
+
+Problem we are solving : Document classification problem using Tweets as short documents and hashtags and keywords as classification
+
+Dataset : The dataset is label and feature vector where the label is a single word and the featurevector is a set of words in the 
+
+	example train data
+		pizza	Jimmy and I love eating Dominos
+		pizza	Dominos is late again
+	Input : Dominos is selling their new pepperoni pi today
+	Output : pizza
+
+How to determine success : check distance between in word2vec
+
+Ilya
