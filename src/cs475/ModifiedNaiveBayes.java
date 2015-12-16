@@ -28,7 +28,7 @@ public class ModifiedNaiveBayes extends NaiveBayes {
 	}
 	
 	private void importWordClusters() throws FileNotFoundException {
-		Scanner scan = new Scanner(new BufferedInputStream(new FileInputStream("./word2vec/new.classes.sorted.txt")));
+		Scanner scan = new Scanner(new BufferedInputStream(new FileInputStream("./word2vec/twitter_big_classes_sorted.txt")));
 		
 		while (scan.hasNextLine()) {
 			String line = scan.nextLine();

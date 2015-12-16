@@ -40,7 +40,7 @@ public class NaiveBayes extends Predictor {
 		this._probLabel = new HashMap<String, Double>();
 		this._condProbWords = new HashMap<>();
 		
-		this._smoothing = 0;
+		this._smoothing = 1;
 	}
 
 	@Override
@@ -59,12 +59,18 @@ public class NaiveBayes extends Predictor {
 			SparseVector<Integer> sv = new SparseVector<>();
 			double totalWordsForLabel = this._vocabCount.get(label).sizeOfValues();
 			double denom = totalWordsForLabel + this._numUniqueVocab;
+			sv.setDenom(denom);
 			//for (Entry<Integer, Double> e : this._vocabCount.get(label)) {
 			for (Integer word : this._uniqueVocab) {	
 				double wordCount = this._vocabCount.get(label).get(word);
 				double closeWordCount = this.getCloseWordCount(label, word);
-				double num = wordCount + this._smoothing;
+				double allWord = wordCount + closeWordCount; 
+				double num = allWord;
+				if (allWord != 0.0) {
+					num += this._smoothing;	
+				}
 				double prob = (double) (num / denom);
+				//System.out.println(word);
 				sv.put(word, prob);
 			}
 			this._condProbWords.put(label, sv);
@@ -78,21 +84,30 @@ public class NaiveBayes extends Predictor {
 		String maxLabel = "";
 		
 		// find prob for all labels
+		//System.out.print("actual: " + instance._label.toString());
 		for (String label : this._uniqueLabels) {
+
 			double prob = this._probLabel.get(label);
 			for (Entry<Integer, Integer> e : instance.getFeatureVector().getNonZeroFeatures()) {
 				int word = e.getKey();
 				int freq = e.getValue();
-				double wordProb = this._condProbWords.get(label).get(word);
+				double condProbWord = this._condProbWords.get(label).get(word);
+				condProbWord = (condProbWord == 0.0) ? ((double)this._smoothing / this._condProbWords.get(label).getDenom()) : condProbWord; 
+				double wordProb = condProbWord * freq;
 				prob *= wordProb;
 				
+//				if (instance._label.toString().equals("802")) {
+//					System.out.println("word: " + word + "wordProb: " + wordProb);
+//				}
+				
 			}
-			
+
 			if (prob > maxProb) {
 				maxProb = prob;
 				maxLabel = label;
 			}
 		}
+		//System.out.println(maxProb);
 		
 		//System.out.println("actual: " + instance._label.toString() + "guess: " + maxLabel);
 		return new ClassificationLabel(Integer.parseInt(maxLabel));

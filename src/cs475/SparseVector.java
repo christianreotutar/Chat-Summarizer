@@ -11,6 +11,7 @@ import java.util.Set;
 public class SparseVector<K extends Serializable> implements Serializable, Iterable<Entry<K, Double>> {
 	
 	private HashMap<K, Double> data = new HashMap<>();
+	private double denom = 1;
 
 	/**
 	 * Adds the feature tuple <index, value> to the list of features
@@ -66,6 +67,17 @@ public class SparseVector<K extends Serializable> implements Serializable, Itera
 			sum += e.getValue(); 
 		}
 		return sum;
+	}
+	
+	/*
+	 * Very hacky, I know
+	 */
+	public double getDenom() {
+		return this.denom;
+	}
+	
+	public void setDenom(double in_denom) {
+		this.denom = in_denom;
 	}
 
 }
