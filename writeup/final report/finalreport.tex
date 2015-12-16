@@ -37,34 +37,31 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-  Electronic messaging services, including Short Message Service (SMS) over phone networs, Instant Messaging (IM) such as Facebook Chat or Whats App, and microblogging platforms such as Twitter have become more popular than ever before. This massive amount of raw data is unparalled in size and while it may be overwhelming to users, but it gives way to many possibilities for the field of machine learning.
+  Electronic messaging services, including Short Message Service (SMS) over phone networks, Instant Messaging (IM) such as Facebook Chat\footnote{https://facebook.com} or Whats App\footnote{https://whatsapp.com}, and microblogging platforms such as Twitter\footnote{https://twitter.com/} have become more popular than ever before. This massive amount of raw data is unparalled in size and while it may be overwhelming to users, but it gives way to many possibilities for the field of machine learning.
   
-  While the majority of all these "short-text" documents are unlabeled, the text posted on the social network known as Twitter (https://twitter.com/) comes naturally labeled through the use of "hashtags" (see section XXXXXXXXXXXXXX). To process the labeled data in this typically multi-class problem, the Na{\"i}ve Bayes classifier is a popular model with results rivaling that of the Support Vector Machine classifier with shorter training time. In this survey, we seek to find improvements in the Na{\"i}ve Bayes classifier such that accuracy is improved and compare this to another classifier used in the problem space.
+  While the majority of all these "short-text" documents are unlabeled, the text posted on the social network known as Twitter comes naturally labeled through the use of "hashtags" (see section 1). To process the labeled data in this typically multi-class problem, the Na{\"i}ve Bayes classifier is a popular model with results rivaling that of the Support Vector Machine classifier with shorter training time. In this survey, we seek to find improvements in the Na{\"i}ve Bayes classifier such that accuracy is improved and compare this to another classifier used in the problem space.
 \end{abstract}
 
 \section{Introduction}
   The classification of documents, spanning from text documents and articles to images and videos, has been a prominent problem in information and computer science. The problem is to assign a category or classification to a given document that gives some indication to relationships between documents or information about the document itself.
   
-  Twitter is an online social networking microblogging application launched in 2006 that allows a user to post a "tweet", a 140 character-message about anything. An important aspect about these tweets relating to this project is the format in which they are posted. If a word in the tweet is prefixed with the pound-sign (\#), also known as a "hash", the word is considered a "hashtag". The purpose of hashtags is to convey the topic of the tweet in which it is used. Because of this hashtag function, twitter data can be exploited by machine learning algorithms in a way that allows the hashtag to serve as the topic, and the body of the tweet to serve as the feature space. This allows for the development of text classification algorithms.
+  Twitter is an on-line social networking microblogging application launched in 2006 that allows a user to post a "tweet", a 140 character-message about anything. An important aspect about these tweets relating to this project is the format in which they are posted. If a word in the tweet is prefixed with the pound-sign (\#), also known as a "hash", the word is considered a "hashtag". The purpose of hashtags is to convey the topic of the tweet in which it is used. Because of this hashtag function, twitter data can be exploited by machine learning algorithms in a way that allows the hashtag to serve as the topic, and the body of the tweet to serve as the feature space. This allows for the development of text classification algorithms.
   
   Text classification (referred to here as short-text classification because of the limited size of the text document) is the task of classifying a document into a defined topic or category. A formal definition relating to a twitter post (tweet): If 
   
 \subsection{Problems in Short-text Classification}
-  Most of the difficulty in getting meaningful results of short-text or chat-message topic classification stems from the incorrect grammar and use of slang in electronic human conversations. In full text documents, subject indexing and classification techniques as well as summarization algorithms have shown success due to advancements in natural language processing algorithms. However, the same algorithms do not apply well to human chat messages where there is lack of sentence structure and correct spelling.
-  This is why we apply supervised learning techniques at a massive scale rather than carefully selected artificial intelligence algorithms designed through the engineering and reverse-engineering of lexical semantics, setence structure, narrative understanding, and other syntax related theory.
+  Most of the difficulty in getting meaningful results of short-text or chat-message topic classification stems from the incorrect grammar and use of slang in electronic human conversations. In full text documents, subject indexing and classification techniques as well as summarization algorithms have seen success due to advancements in natural language processing algorithms. However, the same algorithms do not apply well to human chat messages where there is lack of sentence structure and correct spelling.
+  This is why we apply supervised learning techniques at a massive scale rather than carefully selected artificial intelligence algorithms designed through the engineering and reverse-engineering of lexical semantics, sentence structure, narrative understanding, and other syntax related theory.
 
 \subsection{Topic Classification}
-  This survey deals with the problem of short-text classification in relation to summarization of chat. That is, given a line of text, the goal is to predict the topic of the shart-text (chat message) based on a bag-of-words approach. We do this in the domain of Twitter messages: given a tweet body, we wish to predict the associated hashtag for the tweet. The assumption being that the associated hashtag represents the topic of the tweet.
+  This survey deals with the problem of short-text classification in relation to summarization of chat. That is, given a line of text, the goal is to predict the topic of the short-text (chat message) based on a bag-of-words approach. We do this in the domain of Twitter messages: given a tweet body, we wish to predict the associated hashtag for the tweet. The assumption being that the associated hashtag represents the topic of the tweet.
   
 
 
 \section{Data Description}
- The data we are using for this project comes from Twitter (https://twitter.com/). More specifically, the tweets were downloaded from the Twitter streaming API v1.1 (https://dev.twitter.com/streaming/) using Mark Dredze's Twitter Stream Dowloader ($https://github.com/mdredze/twitter_stream_downloader$).
+The data we are using for this project comes from Twitter. More specifically, the tweets were downloaded from the Twitter streaming API v1.1\footnote{https://dev.twitter.com/streaming/} using Mark Dredze's Twitter Stream Downloader \footnote{https://github.com/mdredze/twitter\_stream\_downloader}.
  
- The tweets were collected on a remote server, and the raw data were in JSON format. The attribute in a raw tweet included many atttributes in addition to the hashtags and the body of the tweet, including info about the user (username, followers, language preference), info about the tweet (whether it was a retweet, whether it was retweeted, when it was created, user mentions).
- 
- The stream downloader was set 
-
+The tweets were collected on a remote server, and the raw data were in JSON format. The attribute in a raw tweet included many attributes in addition to the hashtags and the body of the tweet, including info about the user (username, followers, language preference), info about the tweet (whether it was a retweet, whether it was retweeted, when it was created, user mentions).
 
 \section{Machine Learning Techniques}
 Here give a broad overview of what we're comparing, what techniques we used and why
@@ -84,6 +81,19 @@ Here we give background into the classifier
 
 \section{Methods}
 \subsection{Data Description}
+The stream downloader was set to run in the background on a remote server, and over the course of a month, ended up collecting over 100 million tweets. This was more than we could even hope to process, and so we only ran our algorithm on only a small subset of those.
+
+\subsection{Data filtering}
+Because we had so much raw data, we were able to be pretty liberal about filtering tweets out of the dataset. Therefore, we added to filtering options to a python script \footnote{seen in our code in tweet\_parser.py} and were able to achieve greater accuracy with the "cleaned" tweets. The steps we took were:
+\begin{itemize}
+\item transforming all words to lowercase
+\item removing URLs (\textit{www.example.com})
+\item removing at-mentions (\textit{@JohnDoe})
+\item removing hashtags from the body (\textit{\#pizza})
+\item removing punctuation
+\item removing white-space
+\end{itemize}
+
 Here we talk about the filtering done on the data, the importance of feature vector formation and attribute picking, and the problems we came upon (e.g. language, more than one hash tag).
 
 \subsection{Code for Na{\"i}ve Bayes}
@@ -107,24 +117,28 @@ Any improvements for the classifiers we did not have time to implement
 
 \section{Conclusion}
 
-\section{Comparison to Proposal}
-
+\section*{Comparison to Proposal}
+ Here is a list of what was done differently from what was stated in the proposal:
 \begin{itemize}
-\item A list of what we did differently from proposal
+\item We used a different twitter API in conjunction with Professor Dredze's twitter stream downloader
+\item We were unable to achieve as clear of results as we thought we could have, but after looking at how poorly structured the tweet bodies were and how the hashtags were often not good classification labels, this was to be assumed ("garbage in, garbage out" as they say)
+\item
 \end{itemize}
 
+\section*{How the time was spent on this project}
+Coding the Na{\"i}ve Bayes classifier took longer than expected due to debugging, it was around 20-30 hours worth of work. Adding in the modifications with the word2vec library took an additional 20 hours. Getting the raw data was really easy because of the API, but after achieving bad results, we spent 5-10 hours working with python to filter it. There was an additional 10 hours spent writing python scripts to transform the data into the different forms required (SVM light for Na{\"i}ve Bayes, but a two-dimensional sparse array). Trying to transform Pegasos into a multi-class SVM algorithm took around 15 hours of work. Using the scikit-learn SVM packages was about 20 hours worth of tinkering. Additional research done for this project was approximately 50 hours. Writing this proposal took another 10 hours.
 \section*{Acknowledgments}
-We would like to acknowledge Ilya Shpitser for giving feedback on our project and offering suggestions. Ilya for the skeleton for the code.
-Also, we would like to thank Mark Dredze for providing access to his twitter stream downloader ($https://github.com/mdredze/twitter_stream_downloader$).
+\begin{itemize}
+\item We would like to acknowledge Ilya Shpitser for giving feedback on our project and offering suggestions. We would also like to acknowledge Professor Shpitser for the skeleton used in the code.
+\item We would like to thank Mark Dredze for providing access to his twitter stream downloader \footnote{https://github.com/mdredze/twitter\_stream\_downloader}.
+\end{itemize}
 
-\begin{thebibliography}{}
+\section*{References}
+Wang, Crammer and Vucetic \textit{Multi-Class Pegasos on a Budget}
+\\http://webee.technion.ac.il/people/koby/publicatio\\ns/ICML10\_BPegasos.pdf
 
-\bibitem[\protect\citename{Aho and Ullman}1972]{Aho:72}
-Alfred~V. Aho and Jeffrey~D. Ullman.
-\newblock 1972.
-\newblock {\em The Theory of Parsing, Translation and Compiling}, volume~1.
-\newblock Prentice-{Hall}, Englewood Cliffs, NJ.
+\vspace{1em}
 
-\end{thebibliography}
+Shalev-Shwartz, S., Singer, Y., Srebro, N., \& Cotter, A. (2011). \textit{Pegasos: primal estimated sub-gradient solver for SVM.} Mathematical Programming, 127(1), 3-30. doi:10.1007/s10107-010-0420-4
 
 \end{document}
