@@ -116,9 +116,17 @@ Here give a broad overview of what we're comparing, what techniques we used and 
 
 As it relates to our project, we use a bag of words as our features and a single word as the classification for the bag of words. We assume presence of a word is independent of other words. 
 
+$$ P(A \mid B) = \frac{P(B \mid A) \, P(A)}{P(B)} $$
+% Conditional Independence Assumption
+% New Equation
+
 
 \subsection{Modified Na{\"i}ve Bayes}
-Here we give background into the classifier + word2vec library
+In this survey we introduce a variation to the standard Na{\"i}ve Bayes classifier modified to solve the document classification problem more accurately. There are three main modifications: (1) smoothing of the conditional probabilities in the words and (2) use of Google's word2vec toolkit to make relationships between words in the data.
+
+Looking at the original Na{\"i}ve Bayes, we see that the probability of a classification is determined as that product of the conditional probabilities of the all the words given the labels. If we have a probability of 0 for any of the words, we see that this automatically makes the product 0 and thus the probability of the classification is 0. This is not our goal, however, because there will be many documents that have words not associated with a label in the training data but that does not necessarily mean it will never happen and we should not discount the possibility immediately. Thus we add smoothing to probabilities by add a nonzero positive number to the probability. This number is very small and has no affect on the probability because classification prediction relies only on proportionalities not exact values.
+
+In order to increase connections between words and labels that might not be explicitly in the training data, we use an external toolkit, word2vec, which takes documents and texts as input and then clusters single words with each based on meaning and context from the training documents. We used this k-means clustering tool in order to add conditional probabilities between words not found in the training data to labels based on their association to words actually in the training data. 
 
 \subsection{Multi-class SVM}
 An Support Vector Machine (SVM) is a model that constructs a hyperplane through a set of samples for the purpose of separating them into different classes. The SVM model is a representation of these samples in which the samples of separate categories are divided by a margin that is as large as possible. Formally, given a training set $\{(\vxi,\yi)\}_{i=1}^N$, where $\vx_i \in \mathbb{R}^M$ and $y_i \in\{+1,-1\}$, we want to find the minimizer of the problem:\footnote{CS475 Machine Learning: Homework 3}
@@ -150,7 +158,7 @@ Because we had so much raw data, we were able to be pretty liberal about filteri
 Here we talk about the filtering done on the data, the importance of feature vector formation and attribute picking, and the problems we came upon (e.g. language, more than one hash tag).
 
 \subsection{Code for Na{\"i}ve Bayes}
-  In this survey, we use the multinomial Na{\"i}ve Bayes model used by [Yang and Liu, 1999]
+  In this survey, we use the multinomial Na{\"i}ve Bayes model used by [Yang and Liu, 1999]. We run our classifier 
 
 \subsection{Code for Modified Na{\"i}ve Bayes}
 
@@ -158,7 +166,6 @@ Here we talk about the filtering done on the data, the importance of feature vec
 We wanted to compare our Na{\"i}ve Bayes impelementation with the results from an SVM. We tested a few SVMs from Python's Scikit-learn Machine Learning package\footnote{http://scikit-learn.org/stable/index.html} 
 
 \section{Results}
-Here we give a broad overview of our results
 
 \subsection{Comparisons}
 Lots of tables and graphs
