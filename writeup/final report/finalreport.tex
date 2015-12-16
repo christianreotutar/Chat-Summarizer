@@ -7,6 +7,50 @@
 \usepackage{naaclhlt2010}
 \usepackage{times}
 \usepackage{latexsym}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{url}
+\usepackage{wrapfig}
+\usepackage{color}
+\usepackage{marvosym}
+\usepackage{enumerate}
+\usepackage{subfigure}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{bbm}
+
+\newcommand{\vwi}{{\bf w}_i}
+\newcommand{\vw}{{\bf w}}
+\newcommand{\vx}{{\bf x}}
+\newcommand{\vy}{{\bf y}}
+\newcommand{\vxi}{{\bf x}_i}
+\newcommand{\yi}{y_i}
+\newcommand{\vxj}{{\bf x}_j}
+\newcommand{\vxn}{{\bf x}_n}
+\newcommand{\yj}{y_j}
+\newcommand{\ai}{\alpha_i}
+\newcommand{\aj}{\alpha_j}
+\newcommand{\X}{{\bf X}}
+\newcommand{\Y}{{\bf Y}}
+\newcommand{\vz}{{\bf z}}
+\newcommand{\msigma}{{\bf \Sigma}}
+\newcommand{\vmu}{{\bf \mu}}
+\newcommand{\vmuk}{{\bf \mu}_k}
+\newcommand{\msigmak}{{\bf \Sigma}_k}
+\newcommand{\vmuj}{{\bf \mu}_j}
+\newcommand{\msigmaj}{{\bf \Sigma}_j}
+\newcommand{\pij}{\pi_j}
+\newcommand{\pik}{\pi_k}
+\newcommand{\D}{\mathcal{D}}
+\newcommand{\el}{\mathcal{L}}
+\newcommand{\N}{\mathcal{N}}
+\newcommand{\vxij}{{\bf x}_{ij}}
+\newcommand{\vt}{{\bf t}}
+\newcommand{\yh}{\hat{y}}
+\newcommand{\code}[1]{{\footnotesize \tt #1}}
+\newcommand{\alphai}{\alpha_i}
 \setlength\titlebox{6.5cm}    % Expanding the titlebox
 
 \title{A Survey of Short-text Classification Using Modified Na{\"i}ve Bayes and Multiclass Support Vector Machines\Thanks{This
@@ -76,8 +120,17 @@ As it relates to our project, we use a bag of words as our features and a single
 \subsection{Modified Na{\"i}ve Bayes}
 Here we give background into the classifier + word2vec library
 
-\subsection{SVM}
-Here we give background into the classifier
+\subsection{Multi-class SVM}
+An Support Vector Machine (SVM) is a model that constructs a hyperplane through a set of samples for the purpose of separating them into different classes. The SVM model is a representation of these samples in which the samples of separate categories are divided by a margin that is as large as possible. Formally, given a training set $\{(\vxi,\yi)\}_{i=1}^N$, where $\vx_i \in \mathbb{R}^M$ and $y_i \in\{+1,-1\}$, we want to find the minimizer of the problem:\footnote{CS475 Machine Learning: Homework 3}
+\begin{align}
+\label{eq:obj}
+\min_\vw \lambda \frac{1}{2}||\vw||^2+\frac{1}{N} \sum\limits_{i=1}^N \mathit{l}(\vw;(\vxi,\yi))
+\end{align}
+where $\lambda$ is the regularization parameter,
+\begin{align}
+\mathit{l}(\vw;(\vx,y))=\max\{0,1-y\langle \vw , \vx\rangle\}
+\end{align}
+Previously, we implemented a Support Vector Machine for a binary classification problem. The approach was called Pegasos\footnote{see references}. Pegasos performs an optimization function for minimizing an object function called stochastic gradient descent. However, our Pegasos implementation was for a binary classification task. Even though this SVM implementation was binary, there are a variety of strategies for these to be turned into multinomial classifiers. We used a method called One-Versus-All, in which our classifier is trained on one class at a time, treating its own class of samples as positive, and every other class as a negative sample, thereby turning it into a binary classification task. This procedure is done for each unique class/label (or in our case - hashtag). This technique produces a learner for each of the classes in the set. After training is finished, to predict an unlabeled sample, all of these classifiers are then run over the sample, and the one with the largest confidence is selected as the label.
 
 \section{Methods}
 \subsection{Data Description}
@@ -101,7 +154,8 @@ Here we talk about the filtering done on the data, the importance of feature vec
 
 \subsection{Code for Modified Na{\"i}ve Bayes}
 
-\subsection{Code for SVM}
+\subsection{SVMs: Scikit-learn \& Multi-class Pegasos}
+We wanted to compare our Na{\"i}ve Bayes impelementation with the results from an SVM. We tested a few SVMs from Python's Scikit-learn Machine Learning package\footnote{http://scikit-learn.org/stable/index.html} 
 
 \section{Results}
 Here we give a broad overview of our results
@@ -139,6 +193,9 @@ Wang, Crammer and Vucetic \textit{Multi-Class Pegasos on a Budget}
 
 \vspace{1em}
 
-Shalev-Shwartz, S., Singer, Y., Srebro, N., \& Cotter, A. (2011). \textit{Pegasos: primal estimated sub-gradient solver for SVM.} Mathematical Programming, 127(1), 3-30. doi:10.1007/s10107-010-0420-4
+Shalev-Shwartz, S., Singer, Y., Srebro, N., \& Cotter, A. (2011). \textit{Pegasos: primal estimated sub-gradient solver for SVM.} Mathematical Programming, 127(1), 3-30.
+
+\vspace{1em}
+Crammer, Koby; and Singer, Yoram (2001). \textit{"On the Algorithmic Implementation of Multiclass Kernel-based Vector Machines"} (PDF). J. of Machine Learning Research 2: 265–292.
 
 \end{document}
