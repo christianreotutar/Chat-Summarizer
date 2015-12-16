@@ -44,8 +44,12 @@
 
 \section{Introduction}
   The classification of documents, spanning from text documents and articles to images and videos, has been a prominent problem in information and computer science. The problem is to assign a category or classification to a given document that gives some indication to relationships between documents or information about the document itself.
-
-\subsection{Problems in Document Classification}
+  
+  Twitter is an online social networking microblogging application launched in 2006 that allows a user to post a "tweet", a 140 character-message about anything. An important aspect about these tweets relating to this project is the format in which they are posted. If a word in the tweet is prefixed with the pound-sign (#), also known as a "hash", the word is considered a "hashtag". The purpose of hashtags is to convey the topic of the tweet in which it is used. Because of this hashtag function, twitter data can be exploited by machine learning algorithms in a way that allows the hashtag to serve as the topic, and the body of the tweet to serve as the feature space. This allows for the development of text classification algorithms.
+  
+  Text classification (referred to here as short-text classification because of the limited size of the text document) is the task of classifying a document into a defined topic or category. A formal definition relating to a twitter post (tweet): If 
+  
+\subsection{Problems in Short-text Classification}
   Most of the difficulty in getting meaningful results of short-text or chat-message topic classification stems from the incorrect grammar and use of slang in electronic human conversations. In full text documents, subject indexing and classification techniques as well as summarization algorithms have shown success due to advancements in natural language processing algorithms. However, the same algorithms do not apply well to human chat messages where there is lack of sentence structure and correct spelling.
   This is why we apply supervised learning techniques at a massive scale rather than carefully selected artificial intelligence algorithms designed through the engineering and reverse-engineering of lexical semantics, setence structure, narrative understanding, and other syntax related theory.
 
@@ -55,7 +59,10 @@
 
 
 \section{Data Description}
-The data we are using for this project comes from Twitter (https://twitter.com/). The tweets were downloaded from the Twitter streaming API v1.1 using Mark Dredze's Twitter Stream Dowloader (https://github.com/mdredze/twitter_stream_downloader).
+  The data we are using for this project comes from Twitter (https://twitter.com/). More specifically, the tweets were downloaded from the Twitter streaming API v1.1 (https://dev.twitter.com/streaming/) using Mark Dredze's Twitter Stream Dowloader (https://github.com/mdredze/twitter_stream_downloader).
+  The tweets were collected on a remote server, and the raw data were in JSON format. The attribute in a raw tweet included many atttributes in addition to the hashtags and the body of the tweet, including info about the user (username, followers, language preference), info about the tweet (whether it was a retweet, whether it was retweeted, when it was created, user mentions).
+  The stream downloader was set 
+
 
 \section{Machine Learning Techniques}
 Here give a broad overview of what we're comparing, what techniques we used and why
